@@ -6,7 +6,7 @@ const login = async (req, res, next) => {
    try{
        const {email, password} = req.body
 
-       if(!email || !password){
+       if(!email && !password){
            return res.status(400).json({message:'Пожалуйста, заполните обязательное поля'})
        }
        const user = await prisma.user.findFirst({
@@ -38,7 +38,7 @@ const register = async (req, res, next) => {
     try {
         const {email,password,name} = req.body;
 
-        if (!email || !password || !name) {
+        if (!email && !password && !name) {
             return res.status(400).json({message:"Пожалуйста заполните обязательные полня"})
         }
         const registeredUser = await prisma.user.findFirst({
